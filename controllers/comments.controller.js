@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 
 module.exports.commentsController = {
     getComments: (req, res) => {
-        Comment.find({ newsId: req.query.news }).then(data => {
-            res.json(data)
-        })
+        Comment.find({ newsId: req.query.news })
+            .then(data => res.json(data))
+            .catch(() => res.json([]))
     },
     postComments: (req, res) => {
         let newComment = {

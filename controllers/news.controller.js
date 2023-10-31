@@ -1,5 +1,4 @@
 const { News } = require('../models/News.model')
-const {Category} = require("../models/Category.model");
 const mongoose = require("mongoose");
 
 
@@ -10,13 +9,9 @@ module.exports.newsController = {
         })
     },
     getAllNews: (req, res) => {
-        req.query.category ?
-            News.find({ categoryId: req.query.category }).then(data => {
-                res.json(data)
-            }) :
-            News.find().then(data => {
-                res.json(data)
-            })
+        News.find( req.query.category ? { categoryId: req.query.category } : null)
+            .then(data => res.json(data))
+            .catch(() => res.json([]))
     },
     postNews: (req, res) => {
         let newNews = {
