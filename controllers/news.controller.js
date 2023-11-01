@@ -17,7 +17,7 @@ module.exports.newsController = {
         let newNews = {
             title: req.body.title,
             text: req.body.text,
-            categoryId: new mongoose.Types.ObjectId(req.body.categoryId)
+            categoryId: req.body.categoryId
         }
         News.create(newNews).then(() => {
             res.json(`News: ${req.body.title} created`)
